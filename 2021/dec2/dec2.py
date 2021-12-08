@@ -3,7 +3,7 @@ from submarine import Submarine
 def main():
   sub = Submarine()
   # get input
-  with open('problems/dec2/input.txt') as f:
+  with open('2021/dec2/input.txt') as f:
     movements = [line.split() for line in f]
 
   for m in movements:

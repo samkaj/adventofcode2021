@@ -2,7 +2,7 @@ import time
 
 def main():
     # get input
-    with open("problems/dec6/input.txt") as f:
+    with open("2021/dec6/input.txt") as f:
         population = [int(x) for x in f.readline().split(",")]
     start = time.perf_counter()
     spawn_queue = [0] * 9

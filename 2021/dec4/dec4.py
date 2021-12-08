@@ -3,7 +3,7 @@ from bingo import Bingo
 
 def main():
     # get input
-    with open("problems/dec4/input.txt") as f:
+    with open("2021/dec4/input.txt") as f:
         draws = [int(n) for n in f.readline().strip().split(",")]
         boards = []
         lines = [line.strip() for line in f.readlines()[1:]]

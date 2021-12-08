@@ -3,7 +3,7 @@ from math import floor
 
 def main():
     # get input
-    with open("problems/dec7/input.txt") as f:
+    with open("2021/dec7/input.txt") as f:
         starting_positions = [int(x) for x in f.readline().split(",")]
 
     starting_positions.sort()

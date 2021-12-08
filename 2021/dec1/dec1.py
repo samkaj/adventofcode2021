@@ -1,6 +1,6 @@
 def main():
   # get input
-  with open('problems/dec1/input.txt') as f:
+  with open('2021/dec1/input.txt') as f:
     measures = [int(line.strip()) for line in f]
   p1(measures)
   p2(measures)

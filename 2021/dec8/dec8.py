@@ -1,6 +1,6 @@
 def main():
     # get input
-    with open("problems/dec8/input.txt") as f:
+    with open("2021/dec8/input.txt") as f:
         # entries[i][0] = signal pattern
         # entries[i][1] = output signal
         entries = [x.strip().split(' | ') for x in f.readlines()]

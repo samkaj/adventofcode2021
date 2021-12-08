@@ -1,6 +1,6 @@
 def main():
     # get input
-    with open("problems/dec3/input.txt") as f:
+    with open("2021/dec3/input.txt") as f:
         diagnostics = [line.strip() for line in f]
 
     print(f"Energy consumtion: {power_consumption(diagnostics)}")

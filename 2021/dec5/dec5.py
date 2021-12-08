@@ -1,6 +1,6 @@
 def main():
     # get input
-    with open("problems/dec5/input.txt") as f:
+    with open("2021/dec5/input.txt") as f:
         vectors = []
         for line in f.readlines():
             vectors.append(create_vector_from_string(line))
