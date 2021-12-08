@@ -1,0 +1,91 @@
+letters with _ as prefix are positions for 7segs which are not broken.
+
+acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab
+
+cdfeb fcadb cdfeb cdbaf (none are 8, 7, 4 or 1)
+
+8 = acedgfb
+7 = dab
+4 = eafb
+1 = ab
+
+_a = 7 - 1 = dab - ab = d
+
+cefabd abcdef (0 9)
+
+cdfgeb bcdefg (6)
+
+cagedb abcdeg (0 9)
+
+d, a, b = (0 9) -> the letter which doesnt include all three is 6! -> 6 = cdfgeb
+     ddddd
+    .    a/b
+    .    a/b
+     .....
+    .    a/b
+    .    a/b
+     .....
+
+we can determine _c by subtracting 6 from 8. we now know _f as well.
+8-6     = abcdefg -  b(c)defg = a (6) -> _c=a
+
+every 6 lenghter has _f=b, _b=?, _a=d, _g=?
+
+     ddddd
+    .     a
+    .     a
+     .....
+    .     b
+    .     b
+     .....
+
+9 shares every letter but one with 8. subtracting 8 with 9 leavers _e!
+let's determine 9.
+
+there are 3 digits with 6 letters: 0, 6 and 9.
+6 is known.
+8 - 6 leaves 1, which is the letter that is in 9 and 0.
+
+abcdef (0/9) - 8 => g
+
+bcdefg (6) - 8 => a
+
+abcdeg (0/9) - 8 => f
+
+from this, we get a clue.
+
+     ddddd
+    .     a
+    .     a
+     .f/g.
+   f/g    b
+   f/g    b
+     .....
+
+to find which one is _g, we can try to find 3!
+it has 5 digits, and subtracting dab(f/g) we should get no remainder.
+dabf:
+    cdfbe -> ce
+    gcdfa -> gc
+    fbcad -> c (this is 3! -> _g = c) -> and 3 does not contain g, -> _e = g
+
+     ddddd
+    .     a
+    .     a
+     .f/g.
+   f/g    b
+   f/g    b
+     ccccc
+
+with our _e conclusion, we find that _d = f!
+
+now we only have one remaining, which is e, which goes in _b = e!
+
+     ddddd
+    e     a
+    e     a
+     fffff
+    g     b
+    g     b
+     ccccc
+
