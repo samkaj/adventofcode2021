@@ -1,76 +1,51 @@
+SCORE = {")": 3, "]": 57, "}": 1197, ">": 25137, "(": 1, "[": 2, "{": 3, "<": 4}
+CLOSER = {")": "(", "]": "[", "}": "{", ">": "<"}
+
+
 def main():
     # get input
-    with open("2021/dec10/test.txt") as f:
+    with open("2021/dec10/input.txt") as f:
         lines = [line.strip() for line in f.readlines()]
-    
-    score = 0
+
+    corrupt_score = 0
+    autocomplete_score = []
     for line in lines:
-        score += syntax_score(line)
+        scores = get_score(line)
+        corrupt_score += scores[0]
+        if scores[1] > 0:
+            autocomplete_score.append(scores[1])
+    print(
+        f"Corruption score: {corrupt_score}, Autocomplete score: {median(autocomplete_score)}"
+    )
 
-    print(score)
+
+def median(scores):
+    mid = int((len(scores) - 1) / 2)
+    scores.sort()
+    return scores[mid]
 
 
-def syntax_score(line):
+def get_score(line):
     stack = []
+    corrupt_score = 0
+    corrupt = False
     for c in line:
-        if is_starting(c):
+        if c in "}])>":
+            opener = stack.pop()
+            if opener != CLOSER[c] and corrupt_score == 0:
+                corrupt_score += SCORE[c]
+                corrupt = True
+        else:
             stack.append(c)
-        elif is_closing(c):
-            if not is_correct_closing(c, stack.pop()):
-                return get_score(c)
-    return 0
 
-def line_is_corrupted(line):
-    return False
+    autocomplete_score = 0
+    if not corrupt:
+        # NO idea why I need -1 as stop??? oh well
+        for i in range(len(stack) - 1, -1, -1):
+            autocomplete_score *= 5
+            autocomplete_score += SCORE[stack[i]]
+    return corrupt_score, autocomplete_score
 
-def get_score(c):
-    if c == ')':
-        return 3
-    elif c == ']':
-        return 57
-    elif c == '}':
-        return 1197
-    elif c == '>':
-        return 25137
-
-def is_starting(c):
-    return (
-        c == '(' or
-        c == '{' or
-        c == '[' or
-        c == '<'
-    )
-
-def is_closing(c):
-    return (
-        c == ')' or
-        c == ']' or
-        c == '}' or
-        c == '>'
-    )
-
-def get_closing(c):
-    if c == '(':
-        return ')'
-    elif c == '{':
-        return '}'
-    elif c == '[':
-        return ']'
-    elif c == '<':
-        return '>'
-
-def get_opening(c):
-    if c == ')':
-        return '('
-    elif c == '}':
-        return '{'
-    elif c == ']':
-        return '['
-    elif c == '>':
-        return '<'
-
-def is_correct_closing(c, closing):
-    return closing == get_closing(c)
 
 if __name__ == "__main__":
     main()
