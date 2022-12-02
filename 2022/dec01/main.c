@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define TOP_SIZE 3
+
 int max(int n, int m)
 {
     if (n > m)
@@ -16,20 +18,20 @@ int min(int n, int m)
     return m;
 }
 
-void add(int nums[], int n)
+void add(int nums[], int n, int arrsize)
 {
     int zeroes = 0;
-    for (int i = 0; i < sizeof(nums)/sizeof(*nums); ++i)
+    for (int i = 0; i < arrsize; ++i)
         if (nums[i] == 0)
             zeroes++;
 
     if (zeroes > 0)
-        nums[sizeof(nums) - zeroes] = n;
+        nums[arrsize - zeroes] = n;
     else 
     {
         int smallest_index = 0;
         int small = nums[smallest_index];
-        for (int i = 0; i < sizeof(nums)/sizeof(*nums); ++i)
+        for (int i = 0; i < arrsize; i++)
         {
             if (small != min(small, nums[i])) 
             {
@@ -41,10 +43,10 @@ void add(int nums[], int n)
     }
 }
 
-int sum(int nums[])
+int sum(int nums[], int arrsize)
 {
     int sum = 0;
-    for (int i = 0; i < sizeof(nums)/sizeof(*nums); ++i)
+    for (int i = 0; i < arrsize; i++)
         sum += nums[i];
     return sum;
 }
@@ -55,7 +57,7 @@ int main(void)
     if (!file)
         return -1;
 
-    int top[3];
+    int top[TOP_SIZE];
     char line[10];
     int curr, high = 0;
     while (fgets(line, sizeof(line), file))
@@ -67,7 +69,7 @@ int main(void)
         else
         {
             high = max(curr, high); // part one
-            add(top, curr);         // part two
+            add(top, curr, 3);         // part two
             curr = 0;
         }
     }
@@ -75,6 +77,6 @@ int main(void)
     fclose(file);
 
     printf("Part 1: %d\n", max(curr, high));
-    printf("Part 2: %d\n", sum(top));
+    printf("Part 2: %d\n", sum(top, TOP_SIZE));
     return 0;
 }
