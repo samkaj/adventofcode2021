@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
 from textwrap import indent
+
+
 class File:
     def __init__(self, name: str, size: int):
         self.name = name
@@ -14,6 +16,7 @@ class File:
 
     def get_size(self, dir_sizes):
         return self.size
+
 
 class Dir:
     def __init__(self, parent, name: str):
@@ -70,7 +73,6 @@ class FileSystem:
         return self.root.get_size(self.dir_sizes)
 
 
-
 def main():
     fs = FileSystem()
     cmd = ''
@@ -88,14 +90,19 @@ def main():
             if cmd == 'cd':
                 fs.cd(tokens[2])
 
-    fs.get_size()
+    cap = fs.get_size()
     tot = 0
+    smoll = cap
+    unused = lambda x: 70000000 - cap + x
     for size in fs.dir_sizes:
         if size <= 100000:
             tot += size
+        elif unused(size) >= 30000000 and smoll > size:
+            print(size)
+            smoll = size
 
     print(f'Part one: {tot}')
-
+    print(f'Part two: {smoll}')
 
 
 if __name__ == '__main__':
